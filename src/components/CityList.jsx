@@ -1,17 +1,20 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
+import CityItem from "./CityItem";
 import style from "./CityList.module.css";
+import Spinner from "./Spinner";
+import Message from "./Message";
+function CityList({ cities, isLoading }) {
+  if (isLoading) return <Spinner />;
 
-function CityList() {
-  const [cities, setCities] = useState([]);
-  useEffect(function () {
-    async function getCities() {
-      const res = await fetch(`http://localhost:9000/cities`);
-      const data = await res.json();
-      setCities(data);
-    }
-    getCities();
-  }, []);
-  return <ul className={style.cityList}>List</ul>;
+  if (!cities.length)
+    return <Message message="Add your first city by clicking on the map" />;
+  return (
+    <ul className={style.cityList}>
+      {cities.map((city) => (
+        <CityItem city={city} key={city.id} />
+      ))}
+    </ul>
+  );
 }
 
 export default CityList;
