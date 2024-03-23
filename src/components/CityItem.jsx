@@ -2,6 +2,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
+import styles from "./CityItem.module.css";
+// import { convertToEmoji } from "./Form";
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
     day: "numeric",
@@ -9,8 +12,6 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
-import { Link } from "react-router-dom";
-import styles from "./CityItem.module.css";
 function CityItem({ city }) {
   const {
     cityName,
