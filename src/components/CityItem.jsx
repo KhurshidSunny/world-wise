@@ -9,15 +9,15 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
-import style from "./CityItem.module.css";
+import styles from "./CityItem.module.css";
 function CityItem({ city }) {
   const { cityName, emoji, date } = city;
   return (
-    <li className={style.cityItem}>
-      <span className={style.emoji}>{emoji}</span>
-      <h3 className={city.name}>{cityName}</h3>
-      <time className={style.date}>({formatDate(date)})</time>
-      <button className={style.deleteBtn}>&times;</button>
+    <li className={styles.cityItem}>
+      <span className={styles.emoji}>{emoji}</span>
+      <h3 className={styles.name}>{cityName}</h3>
+      <time className={styles.date}>({formatDate(date)})</time>
+      <button className={styles.deleteBtn}>&times;</button>
     </li>
   );
 }
