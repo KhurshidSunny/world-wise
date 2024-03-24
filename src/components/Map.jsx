@@ -15,11 +15,13 @@ import { useCities } from "../contexts/CitiesContext";
 import Button from "./Button";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useAuth } from "../contexts/FakeUserAuthContext";
 
 function Map() {
   const [searchParams] = useSearchParams();
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([51, -0.09]);
+  const { isAuthenticated } = useAuth();
 
   const {
     isLoading: isLoadingPosition,
