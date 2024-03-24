@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { createContext, useContext, useEffect, useState } from "react";
+import City from "../components/City";
 
 const CitiesContext = createContext();
 
@@ -38,6 +39,39 @@ function CitiesProvider({ children }) {
     }
   }
 
+  async function createCity(newCity) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${URL}cities`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+      const data = await res.json();
+      setCities((cities) => [...cities, newCity]);
+    } catch (err) {
+      alert("There was an error creating the city");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function deleteCity(id) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${URL}cities/${id}`, {
+        method: "DELETE",
+      });
+      setCities((Cities) => cities.filter((city) => city.id !== id));
+    } catch (err) {
+      alert("There was an error deleting city");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <CitiesContext.Provider
       value={{
@@ -45,6 +79,8 @@ function CitiesProvider({ children }) {
         isLoading,
         currentCity,
         getCity,
+        createCity,
+        deleteCity,
       }}
     >
       {children}
